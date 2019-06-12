@@ -4,6 +4,40 @@ import Quick
 import Nimble
 import NSelect
 
+class NSelect {
+    
+    let title: String?
+    let options: [String]
+    let selections: [String]?
+}
+
+//
+let myQuestion = NSelect()
+myQuestion.title = "Ideal workplace for you"
+myQuestion.options = [ "Calm", "Noisy", "Peaceful", "Hectic" ]
+myQuestion.defaultSelections = [ "Calm" ]
+myQuestion.mode = NSelect.Mode.single | .multi
+
+// it's just a passive component
+// just give it a NSelect and it will do presentation logic to user
+let myQuestionViewer: NSelectView = DefaultNSelectView()
+myQuestionViewer.backing = myQuestion
+
+
+// at any point in time
+// we can get about user selection this way
+if let userSelections = myQuestion.selections { // or myQuestionViewer.backing.selections
+
+} else {
+    // no selection
+    // we can get default selection if it was provided
+    print(myQuestion.defaultSelections)
+}
+
+
+
+
+
 class TableOfContentsSpec: QuickSpec {
     override func spec() {
         describe("these will fail") {

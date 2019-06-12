@@ -1,0 +1,27 @@
+PODS:
+  - Nimble (8.0.2)
+  - NSelect (0.1.0)
+  - Quick (2.1.0)
+
+DEPENDENCIES:
+  - Nimble
+  - NSelect (from `../`)
+  - Quick
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Nimble
+    - Quick
+
+EXTERNAL SOURCES:
+  NSelect:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
+  NSelect: 1ed152c25a03f208a2af99d8ee5705a344b58ff8
+  Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
+
+PODFILE CHECKSUM: c781149d6ba12496b3e6000989da5ddc5df500bc
+
+COCOAPODS: 1.6.1
