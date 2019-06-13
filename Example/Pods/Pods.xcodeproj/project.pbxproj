@@ -261,7 +261,7 @@
 		90E61B87640F2204D0B594D22DCAEEDA /* BeIdenticalTo.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = BeIdenticalTo.swift; path = Sources/Nimble/Matchers/BeIdenticalTo.swift; sourceTree = "<group>"; };
 		9157161371EBBC8805A3F479547B53C8 /* Pods-NSelect_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-NSelect_Tests-umbrella.h"; sourceTree = "<group>"; };
 		91B96C60C61593B7E4F7B3F072F98017 /* UIRadioButton.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UIRadioButton.swift; path = UIRadioButton/Classes/UIRadioButton.swift; sourceTree = "<group>"; };
-		937367EF242C3B9D3958D344F11F27C6 /* NSelect.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NSelect.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		937367EF242C3B9D3958D344F11F27C6 /* NSelect.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = NSelect.podspec; sourceTree = "<group>"; tabWidth = 2; };
 		93BA0FF967AC6F415045B5CC0F371F60 /* Pods-NSelect_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-NSelect_Example-Info.plist"; sourceTree = "<group>"; };
 		9485287546D2B320DD5ACCE975E67754 /* ThrowAssertion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ThrowAssertion.swift; path = Sources/Nimble/Matchers/ThrowAssertion.swift; sourceTree = "<group>"; };
 		95D6D2F7DEC65836C64E8D63713571BE /* CwlMachBadInstructionHandler.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = CwlMachBadInstructionHandler.h; path = Carthage/Checkouts/CwlPreconditionTesting/Sources/CwlMachBadInstructionHandler/include/CwlMachBadInstructionHandler.h; sourceTree = "<group>"; };
@@ -547,10 +547,10 @@
 			isa = PBXGroup;
 			children = (
 				CBCF4EAA5BA19FBFCE397EA0B35F2223 /* NSelect.swift */,
-				78A481B2EABA7C4985704B4C2BEF647D /* DefaultNSelectView.swift */,
 				DBE9E50AD82F2B47E9F0659263816E21 /* NSelectError.swift */,
 				E0009F8B916E9AB0800873C80E53E82F /* NSelectMode.swift */,
 				A2BACF0A2B8EC212742F91B652933AAE /* NSelectView.swift */,
+				78A481B2EABA7C4985704B4C2BEF647D /* DefaultNSelectView.swift */,
 				B5C47A7BC989E3CB0AF47C3DB0DFEC93 /* Pod */,
 				0D79E1EDFC53D6D513BFC976F8DFE0B2 /* Support Files */,
 			);
