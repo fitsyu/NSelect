@@ -1,6 +1,8 @@
 use_frameworks!
 
 target 'NSelect_Example' do
+ 
+  pod 'UIRadioButton', :git => 'https://github.com/fitsyu/UIRadioButton.git'
   pod 'NSelect', :path => '../'
 
   target 'NSelect_Tests' do
@@ -9,7 +11,6 @@ target 'NSelect_Example' do
     pod 'Quick'
     pod 'Nimble'
     
-    pod 'UIRadioButton', :path => '/Users/iOSDev/Clones/UIRadioButton'
 
   end
 end
