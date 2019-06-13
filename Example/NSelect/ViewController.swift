@@ -12,6 +12,7 @@ import NSelect
 class ViewController: UIViewController {
     
     @IBOutlet weak var singleQuestionView: DefaultNSelectView!
+    @IBOutlet weak var multiQuestionView: DefaultNSelectView!
     
     @IBOutlet weak var button: UIButton!
     
@@ -29,6 +30,15 @@ class ViewController: UIViewController {
         singleQuestionView.present()
         
         button.addTarget(self, action: #selector(self.printSelections), for: .touchUpInside)
+        
+        
+        let multiQuestion = NSelect(options: "Fun", "Comfy", "Noisy", "Hectic")
+        multiQuestion.title = "Ideal workplace for you"
+        multiQuestion.mode = .multiple
+        
+        multiQuestionView.backing = multiQuestion
+        multiQuestionView.delegate = self
+        multiQuestionView.present()
     }
 
     
