@@ -12,14 +12,11 @@ public class DefaultNSelectView: UIView, NSelectView {
     
     public var delegate: NSelectViewDelegate?
     
+    private var radioButtons = UIRadioButtonGroup()
+    
+    private var optionViews: [UIRadioButton:String] = [:]
+    
     public func present() {
-        
-        if backing.mode == .single {
-            // draw radio buttons
-        } else {
-            // draw checkboxes
-        }
-        
         
         var y = 0
         
@@ -30,39 +27,44 @@ public class DefaultNSelectView: UIView, NSelectView {
         self.addSubview(label)
         
         backing.options.forEach {
-            let label = UILabel(frame: CGRect(x: 0, y: y, width: 100, height: 30))
+            let label = UILabel(frame: CGRect(x: 50, y: y, width: 100, height: 30))
             label.text = $0
             
             y += 30
             self.addSubview(label)
+            
+            
+            let rb = UIRadioButton()
+            rb.frame.size   = CGSize(width: 30, height: 30)
+            rb.frame.origin = label.frame.origin.applying(
+                CGAffineTransform(translationX: -50, y: 0))
+            self.addSubview(rb)
+            
+            rb.addTarget(self, action: #selector(updateSelections(_:)), for: .valueChanged)
+            
+            if backing.mode == .single {
+                // draw radio buttons
+                radioButtons.add(rb)
+            } else {
+                // draw checkboxes
+                
+            }
+
+            self.optionViews[rb] = $0
         }
      
     }
     
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-        print("init by frame")
-//        present()
+    @objc func updateSelections(_ sender: UIRadioButton) {
+        
+        if let option = self.optionViews[sender] {
+            if sender.isSelected {
+                backing.select(option: option)
+            } else {
+                backing.deselect(option: option)
+            }
+        }
     }
-    
-    public required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        print("init by coder")
-//        present()
-    }
-    
-    public override func awakeFromNib() {
-        super.awakeFromNib()
-        print("init from nib")
-//        present()
-    }
-    
-    public override func draw(_ rect: CGRect) {
-        super.draw(rect)
-//        present()
-    }
-    
     
     
 }

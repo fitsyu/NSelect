@@ -15,28 +15,27 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var button: UIButton!
     
+    @IBOutlet weak var label: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let singleQuestion: NSelect = NSelect(options: "Red", "Green", "Blue")
         singleQuestion.title = "What color we are allowed to go?"
+        singleQuestion.mode  = .single
         
         singleQuestionView.backing = singleQuestion
         singleQuestionView.delegate = self
-//        singleQuestionView.present()
+        singleQuestionView.present()
         
         button.addTarget(self, action: #selector(self.printSelections), for: .touchUpInside)
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        singleQuestionView.present()
-    }
+
     
     @objc func printSelections() {
-        print(singleQuestionView.backing.selections() ?? "no selections")
+        let list = singleQuestionView.backing.selections()
+        let text = list?.joined(separator: ", ") ?? "No selections"
+        label.text = text
     }
 }
 
