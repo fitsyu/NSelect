@@ -4,7 +4,6 @@
 //
 //  Created by iOSDev on 13/06/19.
 //
-import UIRadioButton
 
 public class DefaultNSelectView: UIView, NSelectView {
     
@@ -12,59 +11,80 @@ public class DefaultNSelectView: UIView, NSelectView {
     
     public var delegate: NSelectViewDelegate?
     
-    private var radioButtons = UIRadioButtonGroup()
-    
-    private var optionViews: [UIRadioButton:String] = [:]
+    var tableView: UITableView = UITableView()
     
     public func present() {
         
-        var y = 0
+        tableView.frame = self.frame
+        addSubview(tableView)
         
-        let label = UILabel(frame: CGRect(x: 0, y: y, width: 100, height: 30))
-        label.text = backing.title
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            
+        ])
         
-        y += 30
-        self.addSubview(label)
+        tableView.dataSource = self
+        tableView.delegate   = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.reloadData()
         
-        backing.options.forEach {
-            let label = UILabel(frame: CGRect(x: 50, y: y, width: 100, height: 30))
-            label.text = $0
-            
-            y += 30
-            self.addSubview(label)
-            
-            
-            let rb = UIRadioButton()
-            rb.frame.size   = CGSize(width: 30, height: 30)
-            rb.frame.origin = label.frame.origin.applying(
-                CGAffineTransform(translationX: -50, y: 0))
-            self.addSubview(rb)
-            
-            rb.addTarget(self, action: #selector(updateSelections(_:)), for: .valueChanged)
-            
-            if backing.mode == .single {
-                // draw radio buttons
-                radioButtons.add(rb)
-            } else {
-                // draw checkboxes
-                
-            }
+        if backing.mode == .multiple {
+            tableView.allowsMultipleSelection = true
+        } else {
+            tableView.allowsMultipleSelection = false
+        }
+    }
+    
+}
 
-            self.optionViews[rb] = $0
-        }
-     
+
+extension DefaultNSelectView: UITableViewDataSource {
+    
+    public func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
     
-    @objc func updateSelections(_ sender: UIRadioButton) {
+    public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return backing.options.count
+    }
+    
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        cell.selectionStyle = .none
         
-        if let option = self.optionViews[sender] {
-            if sender.isSelected {
-                backing.select(option: option)
-            } else {
-                backing.deselect(option: option)
-            }
-        }
+        cell.textLabel?.text = backing.options[indexPath.row]
+        
+        return cell
     }
     
+    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return backing.title
+    }
+}
+
+extension DefaultNSelectView: UITableViewDelegate {
     
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let option = backing.options[indexPath.row]
+        backing.select(option: option)
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        
+        delegate?.didSelect(self, item: option)
+    }
+    
+    public func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        let option = backing.options[indexPath.row]
+        backing.deselect(option: option)
+        
+        tableView.cellForRow(at: indexPath)?.accessoryType = .none
+        
+        delegate?.didDeselect(self, item: option)
+    }
 }
