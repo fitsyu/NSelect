@@ -37,6 +37,8 @@ public class DefaultNSelectView: UIView, NSelectView {
         } else {
             tableView.allowsMultipleSelection = false
         }
+        
+        tableView.tableFooterView = UIView(frame: CGRect.zero)
     }
     
 }
