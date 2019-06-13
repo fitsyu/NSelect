@@ -8,5 +8,8 @@ target 'NSelect_Example' do
 
     pod 'Quick'
     pod 'Nimble'
+    
+    pod 'UIRadioButton', :path => '/Users/iOSDev/Clones/UIRadioButton'
+
   end
 end

@@ -4,81 +4,72 @@ import Quick
 import Nimble
 import NSelect
 
-class NSelect {
+class NSelectSpec: QuickSpec {
     
-    let title: String?
-    let options: [String]
-    let selections: [String]?
-}
-
-//
-let myQuestion = NSelect()
-myQuestion.title = "Ideal workplace for you"
-myQuestion.options = [ "Calm", "Noisy", "Peaceful", "Hectic" ]
-myQuestion.defaultSelections = [ "Calm" ]
-myQuestion.mode = NSelect.Mode.single | .multi
-
-// it's just a passive component
-// just give it a NSelect and it will do presentation logic to user
-let myQuestionViewer: NSelectView = DefaultNSelectView()
-myQuestionViewer.backing = myQuestion
-
-
-// at any point in time
-// we can get about user selection this way
-if let userSelections = myQuestion.selections { // or myQuestionViewer.backing.selections
-
-} else {
-    // no selection
-    // we can get default selection if it was provided
-    print(myQuestion.defaultSelections)
-}
-
-
-
-
-
-class TableOfContentsSpec: QuickSpec {
     override func spec() {
-        describe("these will fail") {
-
-            it("can do maths") {
-                expect(1) == 2
-            }
-
-            it("can read") {
-                expect("number") == "string"
-            }
-
-            it("will eventually fail") {
-                expect("time").toEventually( equal("done") )
-            }
+        
+        describe("given option 1, 2, 3 ") {
             
-            context("these will pass") {
-
-                it("can do maths") {
-                    expect(23) == 23
-                }
-
-                it("can read") {
-                    expect("🐮") == "🐮"
-                }
-
-                it("will eventually pass") {
-                    var time = "passing"
-
-                    DispatchQueue.main.async {
-                        time = "done"
+            let myQuestion = NSelect()
+            myQuestion.options = ["1", "2", "3"]
+            
+            
+            context("when mode is single and option 1 is selected") {
+                
+                myQuestion.mode = .single
+                myQuestion.select(option: "1")
+                
+                // happy path
+                it("then should gives back one and only one selection") {
+                    
+                    guard let selections = myQuestion.selections() else {
+                        XCTFail()
+                        return
                     }
-
-                    waitUntil { done in
-                        Thread.sleep(forTimeInterval: 0.5)
-                        expect(time) == "done"
-
-                        done()
-                    }
+                    
+                    expect(selections.count).to(equal(1))
+                    expect(selections.contains("1")).to(beTrue())
+                    
+                }
+                
+                
+                // not quite happy
+                it("then should not allow to select more than one") {
+                   
+                    myQuestion.select(option: "2")
+                    
+                    expect(myQuestion.error).notTo(beNil())
+                   
                 }
             }
         }
+        
+        describe("multiple") {
+            
+            let myQuestion = NSelect()
+            myQuestion.options = ["1", "2", "3"]
+            
+            context("when mode is multiple and option 1 and 2 are selected") {
+                
+                myQuestion.mode    = .multiple
+                myQuestion.select(option: "1")
+                myQuestion.select(option: "2")
+                
+                it("then it should gives back the selections with more than one") {
+                    
+                    expect(myQuestion.selections()).notTo(beNil())
+                    
+                    guard let selections = myQuestion.selections() else {
+                        XCTFail()
+                        return
+                    }
+                    
+                    expect(selections.count).to(equal(2))
+                    expect(selections.contains("1")).to(equal(true))
+                    expect(selections.contains("2")).to(equal(true))
+                }
+            }
+        }
+        
     }
 }
