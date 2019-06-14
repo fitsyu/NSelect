@@ -48,6 +48,13 @@ public class DefaultNSelectView: UIView, NSelectView {
             tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
         ])
         
+        // select the default by default
+        backing.defaultSelections?.forEach { defaultOption in
+            if let idx = backing.options.firstIndex(of: defaultOption) {
+                tableView.delegate?.tableView?(tableView,
+                                               didSelectRowAt: IndexPath(row: idx, section: 0))
+            }
+        }
     }
     
 }
