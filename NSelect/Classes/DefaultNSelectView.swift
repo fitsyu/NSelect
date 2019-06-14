@@ -15,30 +15,39 @@ public class DefaultNSelectView: UIView, NSelectView {
     
     public func present() {
         
-        tableView.frame = self.frame
+        tableView.frame = self.bounds
         addSubview(tableView)
         
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: self.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
-            
-        ])
-        
-        tableView.dataSource = self
-        tableView.delegate   = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.reloadData()
-        
+        // setup
         if backing.mode == .multiple {
             tableView.allowsMultipleSelection = true
         } else {
             tableView.allowsMultipleSelection = false
         }
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.dataSource = self
+        tableView.delegate   = self
+        tableView.reloadData()
+        
         tableView.tableFooterView = UIView(frame: CGRect.zero)
+
+        // sizing
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.rowHeight = 42
+        tableView.sectionHeaderHeight = 40
+        let h = (tableView.rowHeight * CGFloat(tableView.numberOfRows(inSection: 0)) + tableView.sectionHeaderHeight)
+        tableView.frame.size.height = h
+
+        // lock in layout
+        NSLayoutConstraint.activate([
+            self.heightAnchor.constraint(equalToConstant: h),
+            tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            tableView.topAnchor.constraint(equalTo: self.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+        ])
+        
     }
     
 }
