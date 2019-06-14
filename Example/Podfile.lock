@@ -1,15 +1,12 @@
 PODS:
   - Nimble (8.0.2)
-  - NSelect (0.1.0):
-    - UIRadioButton
+  - NSelect (0.1.0)
   - Quick (2.1.0)
-  - UIRadioButton (0.1.5)
 
 DEPENDENCIES:
   - Nimble
   - NSelect (from `../`)
   - Quick
-  - UIRadioButton (from `https://github.com/fitsyu/UIRadioButton.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -19,20 +16,12 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   NSelect:
     :path: "../"
-  UIRadioButton:
-    :git: https://github.com/fitsyu/UIRadioButton.git
-
-CHECKOUT OPTIONS:
-  UIRadioButton:
-    :commit: d03003bf6c6383a37423b4c120a911f44922fe76
-    :git: https://github.com/fitsyu/UIRadioButton.git
 
 SPEC CHECKSUMS:
   Nimble: 622629381bda1dd5678162f21f1368cec7cbba60
-  NSelect: f4629295d96cda75f8589818d0d687a389ef0fca
+  NSelect: 18cbb2ade83cbe62cbebe9d24dec61cfe279b104
   Quick: 4be43f6634acfa727dd106bdf3929ce125ffa79d
-  UIRadioButton: 7c232e5369e9b7371de4674cae13728f4544ac03
 
-PODFILE CHECKSUM: f0eda567ec230e9ce28211f822e661d0cd6e05b1
+PODFILE CHECKSUM: 0b62ed38bac289cc4cc99fbdbacf0236ee9dc850
 
 COCOAPODS: 1.6.1
