@@ -36,12 +36,10 @@ public class DefaultNSelectView: UIView, NSelectView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.rowHeight = 42
         tableView.sectionHeaderHeight = 40
-        let h = (tableView.rowHeight * CGFloat(tableView.numberOfRows(inSection: 0)) + tableView.sectionHeaderHeight)
-        tableView.frame.size.height = h
+   
 
         // lock in layout
         NSLayoutConstraint.activate([
-            self.heightAnchor.constraint(equalToConstant: h),
             tableView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: self.topAnchor),
@@ -55,6 +53,19 @@ public class DefaultNSelectView: UIView, NSelectView {
                                                didSelectRowAt: IndexPath(row: idx, section: 0))
             }
         }
+    }
+    
+    public override var intrinsicContentSize: CGSize {
+        
+        let h = (tableView.rowHeight
+            * CGFloat(tableView.numberOfRows(inSection: 0))
+            + tableView.sectionHeaderHeight)
+        tableView.frame.size.height = h
+        
+        var size = super.intrinsicContentSize
+        size.height = h
+        
+        return size
     }
     
 }
