@@ -35,7 +35,7 @@ class ViewController: UIViewController {
         let multiQuestion = NSelect(options: "Fun", "Comfy", "Noisy", "Hectic")
         multiQuestion.title = "Ideal workplace for you"
         multiQuestion.mode = .multiple
-        multiQuestion.defaultSelections = ["Fun"]
+        multiQuestion.defaultSelections = ["Fun", "Noisy"]
         
         multiQuestionView.backing = multiQuestion
         multiQuestionView.delegate = self
